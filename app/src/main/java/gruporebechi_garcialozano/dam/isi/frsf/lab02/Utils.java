@@ -25,6 +25,10 @@ import java.util.Random;
 public class Utils {
     DecimalFormat f = new DecimalFormat("##.00");
 
+    private ElementoMenu[] listaBebidas;
+    private ElementoMenu[] listaPlatos;
+    private ElementoMenu[] listaPostre;
+
     class ElementoMenu {
         private Integer id;
         private String nombre;
@@ -78,7 +82,7 @@ public class Utils {
 
     public void iniciarListas(){
         // inicia lista de bebidas
-        ElementoMenu[] listaBebidas = new ElementoMenu[7];
+        listaBebidas = new ElementoMenu[7];
         listaBebidas[0]=new ElementoMenu(1,"Coca");
         listaBebidas[1]=new ElementoMenu(4,"Jugo");
         listaBebidas[2]=new ElementoMenu(6,"Agua");
@@ -87,7 +91,7 @@ public class Utils {
         listaBebidas[5]=new ElementoMenu(10,"Vino");
         listaBebidas[6]=new ElementoMenu(11,"Cerveza");
         // inicia lista de platos
-        ElementoMenu[] listaPlatos= new ElementoMenu[14];
+        listaPlatos= new ElementoMenu[14];
         listaPlatos[0]=new ElementoMenu(1,"Ravioles");
         listaPlatos[1]=new ElementoMenu(2,"Gnocchi");
         listaPlatos[2]=new ElementoMenu(3,"Tallarines");
@@ -101,9 +105,9 @@ public class Utils {
         listaPlatos[10]=new ElementoMenu(11,"Picada 1");
         listaPlatos[11]=new ElementoMenu(12,"Picada 2");
         listaPlatos[12]=new ElementoMenu(13,"Hamburguesa");
-        listaPlatos[12]=new ElementoMenu(14,"Calamares");
+        listaPlatos[13]=new ElementoMenu(14,"Calamares");
         // inicia lista de postres
-        ElementoMenu[] listaPostre= new ElementoMenu[15];
+        listaPostre= new ElementoMenu[15];
         listaPostre[0]=new ElementoMenu(1,"Helado");
         listaPostre[1]=new ElementoMenu(2,"Ensalada de Frutas");
         listaPostre[2]=new ElementoMenu(3,"Macedonia");
@@ -120,6 +124,18 @@ public class Utils {
         listaPostre[13]=new ElementoMenu(14,"Frozen Yougurth");
         listaPostre[14]=new ElementoMenu(15,"Queso y Batata");
 
+    }
+
+    public ElementoMenu[] getListaPostre(){
+        return listaPostre;
+    }
+
+    public ElementoMenu[] getListaBebidas(){
+        return listaBebidas;
+    }
+
+    public ElementoMenu[] getListaPlatos(){
+        return listaPlatos;
     }
 
 }
