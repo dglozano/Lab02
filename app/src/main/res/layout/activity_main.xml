@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -72,6 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
                     android:paddingRight="5dp"
                     android:text="@string/plato" />
 
@@ -120,7 +121,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:autoText="false"
                     android:text="@string/reiniciar"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -128,9 +128,8 @@
             <ListView
                 android:id="@+id/listview_items_pedido"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
+                android:layout_height="133dp"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
