@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -41,7 +40,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Obtenemos los elementos de la vista que vamos a utilizar
+        getElementosById();
+        inicializarDatos();
+        addListeners();
+        crearAdaptadores();
+    }
+
+    private void getElementosById() {
         tgbtnReservaDelivery = (ToggleButton) findViewById(R.id.tgbtn_reserva_delivery);
         spinnerHorario = (Spinner) findViewById(R.id.spinner_horario);
         switchNotificarReserva = (Switch) findViewById(R.id.switch_notificar_reserva);
@@ -51,24 +56,28 @@ public class MainActivity extends AppCompatActivity {
         btnAgregar = (Button) findViewById(R.id.btn_agregar);
         btnConfirmar = (Button) findViewById(R.id.btn_confirmar);
         btnReiniciar = (Button) findViewById(R.id.btn_reiniciar);
+    }
 
-        //Inicializamos los datos
+    private void inicializarDatos() {
         utils = new Utils();
         utils.iniciarListas();
         platos = utils.getListaPlatos();
         bebidas = utils.getListaBebidas();
         postres = utils.getListaPostre();
+    }
 
-        // Agregamos listeners necesarios
+    private void addListeners() {
         tgbtnReservaDelivery.setOnCheckedChangeListener(new ReservaDeliveryTgbtnListener());
-        spinnerHorario.setOnItemClickListener(new HorarioSpinnerListener());
+        spinnerHorario.setOnItemSelectedListener(new HorarioSpinnerListener());
         switchNotificarReserva.setOnCheckedChangeListener(new NotificarReservaSwitchListener());
         radiogrpTipoPlato.setOnCheckedChangeListener(new TipoPlatoRadiogrpListener());
         listviewItemsPedido.setOnItemClickListener(new ItemsPedidoListViewListener());
         btnAgregar.setOnClickListener(new AgregarBtnListener());
         btnConfirmar.setOnClickListener(new ConfirmarBtnListener());
         btnReiniciar.setOnClickListener(new ReiniciarBtnListener());
+    }
 
+    private void crearAdaptadores() {
         //Creamos y seteamos los adapters para el spinner y el listview
         ArrayAdapter<CharSequence> spinnerHorarioAdapter = ArrayAdapter.createFromResource(this,
                 R.array.horarios, android.R.layout.simple_spinner_item);
@@ -87,9 +96,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class HorarioSpinnerListener implements AdapterView.OnItemClickListener {
+    private class HorarioSpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            //TODO implementar
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
             //TODO implementar
         }
     }
