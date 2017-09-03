@@ -12,4 +12,6 @@
     <string name="agregar">Agregar</string>
     <string name="confirmar_pedido">Confirmar Pedido</string>
     <string name="reiniciar">Reiniciar</string>
+    <string name="error_ya_confirmado">El pedido ya fue realizado.</string>
+    <string name="error_empty">No ha seleccionado ningun plato</string>
 </resources>

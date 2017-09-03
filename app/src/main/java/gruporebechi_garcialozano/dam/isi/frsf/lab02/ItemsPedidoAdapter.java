@@ -29,7 +29,6 @@ public class ItemsPedidoAdapter extends ArrayAdapter<Utils.ElementoMenu> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        DecimalFormat df = new DecimalFormat("#.##");
         View row = convertView;
         if(row == null) row = inflater.inflate(R.layout.row_plato, parent, false);
         ViewItemHolder holder = (ViewItemHolder) row.getTag();
@@ -38,9 +37,7 @@ public class ItemsPedidoAdapter extends ArrayAdapter<Utils.ElementoMenu> {
             row.setTag(holder);
         }
 
-        String nombre = this.getItem(position).getNombre();
-        String importe = df.format(this.getItem(position).getPrecio());
-        holder.nombreImporteTextView.setText(nombre + " ($ " + importe + ")");
+        holder.nombreImporteTextView.setText(this.getItem(position).toString());
 
         holder.seleccionadoRadioBtn.setOnClickListener(new radioBtnListener(position));
 
@@ -90,5 +87,13 @@ public class ItemsPedidoAdapter extends ArrayAdapter<Utils.ElementoMenu> {
             selectedPosition = position;
             seleccionadoRadioBtn = (RadioButton) view;
         }
+    }
+
+    public Utils.ElementoMenu getSelected() {
+        Utils.ElementoMenu elementoSeleccionado = null;
+        if(selectedPosition != -1) {
+            elementoSeleccionado = this.getItem(selectedPosition);
+        }
+        return elementoSeleccionado;
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.text.DecimalFormat;
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private Utils.ElementoMenu[] platos;
     private Utils.ElementoMenu[] bebidas;
     private Utils.ElementoMenu[] postres;
+
+    private ArrayList<Utils.ElementoMenu> listaPedidos;
+    private boolean pedidoConfirmado = false;
 
     private ArrayList<Utils.ElementoMenu> listaItems;
     private ItemsPedidoAdapter itemsPedidoAdapter;
@@ -74,17 +80,15 @@ public class MainActivity extends AppCompatActivity {
         platos = utils.getListaPlatos();
         bebidas = utils.getListaBebidas();
         postres = utils.getListaPostre();
+        listaPedidos = new ArrayList<>();
     }
 
     private void addListeners() {
-        tgbtnReservaDelivery.setOnCheckedChangeListener(new ReservaDeliveryTgbtnListener());
-        spinnerHorario.setOnItemSelectedListener(new HorarioSpinnerListener());
-        switchNotificarReserva.setOnCheckedChangeListener(new NotificarReservaSwitchListener());
         radiogrpTipoPlato.setOnCheckedChangeListener(new TipoPlatoRadiogrpListener());
-        listviewItemsPedido.setOnItemClickListener(new ItemsPedidoListViewListener());
         btnAgregar.setOnClickListener(new AgregarBtnListener());
         btnConfirmar.setOnClickListener(new ConfirmarBtnListener());
         btnReiniciar.setOnClickListener(new ReiniciarBtnListener());
+        txtDetallesPedido.setMovementMethod(new ScrollingMovementMethod());
     }
 
     private void crearAdaptadores() {
@@ -96,32 +100,6 @@ public class MainActivity extends AppCompatActivity {
         listaItems = new ArrayList<>(Arrays.asList(platos));
         itemsPedidoAdapter = new ItemsPedidoAdapter(this, listaItems);
         listviewItemsPedido.setAdapter(itemsPedidoAdapter);
-    }
-
-    private class ReservaDeliveryTgbtnListener implements CompoundButton.OnCheckedChangeListener {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            //TODO implementar
-        }
-    }
-
-    private class HorarioSpinnerListener implements AdapterView.OnItemSelectedListener {
-        @Override
-        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            //TODO implementar
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> adapterView) {
-            //TODO implementar
-        }
-    }
-
-    private class NotificarReservaSwitchListener implements CompoundButton.OnCheckedChangeListener {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            //TODO implementar
-        }
     }
 
     private class TipoPlatoRadiogrpListener implements RadioGroup.OnCheckedChangeListener {
@@ -143,31 +121,57 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class ItemsPedidoListViewListener implements AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            //TODO implementar
-        }
-    }
-
     private class AgregarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            //TODO implementar
+            Utils.ElementoMenu elementoMenu = itemsPedidoAdapter.getSelected();
+            if(elementoMenu != null && !pedidoConfirmado){
+                String text = listaPedidos.isEmpty() ? "" : txtDetallesPedido.getText().toString() + "\n";
+                listaPedidos.add(elementoMenu);
+                text += elementoMenu.toString();
+                txtDetallesPedido.setText(text);
+            }
+            else {
+                displayErrores();
+            }
         }
     }
 
     private class ConfirmarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            //TODO implementar
+            if(!listaPedidos.isEmpty() && !pedidoConfirmado){
+                Double total = 0.0;
+                pedidoConfirmado = true;
+                for(Utils.ElementoMenu e : listaPedidos){
+                    total += e.getPrecio();
+                }
+                DecimalFormat df = new DecimalFormat("##.##");
+                txtDetallesPedido.setText(txtDetallesPedido.getText().toString() + "\nTotal: $ " + df.format(total));
+            }
+            else {
+                displayErrores();
+            }
         }
     }
 
     private class ReiniciarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            //TODO implementar
+            listaPedidos.clear();
+            txtDetallesPedido.setText(R.string.no_hay_items);
+            pedidoConfirmado = false;
+            txtDetallesPedido.scrollTo(0,0);
+            radiogrpTipoPlato.check(R.id.radiobtn_plato);
+        }
+    }
+
+    private void displayErrores() {
+        if(pedidoConfirmado) {
+            Toast.makeText(MainActivity.this, R.string.error_ya_confirmado, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(MainActivity.this, R.string.error_empty, Toast.LENGTH_SHORT).show();
         }
     }
 }

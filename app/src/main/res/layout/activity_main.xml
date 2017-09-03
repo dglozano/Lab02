@@ -57,6 +57,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:padding="10dp"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical"
                 android:text="@string/no_hay_items" />
 
             <RadioGroup
