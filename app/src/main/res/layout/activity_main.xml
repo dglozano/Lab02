@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -28,9 +28,8 @@
 
             <ToggleButton
                 android:id="@+id/tgbtn_reserva_delivery"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="@string/"
                 android:textOff="@string/reservar_mesa"
                 android:textOn="@string/delivery" />
 
@@ -43,7 +42,9 @@
             <Spinner
                 android:id="@+id/spinner_horario"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp" />
 
             <Switch
                 android:id="@+id/switch_notificar_reserva"
@@ -52,16 +53,21 @@
                 android:text="@string/notificar_reserva" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/txt_detalles_pedido"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:padding="10dp"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical"
                 android:text="@string/no_hay_items" />
 
             <RadioGroup
                 android:id="@+id/radiogrp_tipo_plato"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:checkedButton="@+id/radiobtn_plato"
                 android:orientation="horizontal">
 
@@ -70,6 +76,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
+                    android:paddingRight="5dp"
                     android:text="@string/plato" />
 
                 <RadioButton
@@ -77,6 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingRight="5dp"
                     android:text="@string/postre" />
 
                 <RadioButton
@@ -84,6 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingRight="5dp"
                     android:text="@string/bebida" />
 
             </RadioGroup>
@@ -99,29 +109,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/agregar" />
+                    android:text="@string/agregar"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/btn_confirmar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/confirmar_pedido" />
+                    android:text="@string/confirmar_pedido"
+                    android:textSize="12sp" />
 
                 <Button
-                    android:id="@+id/btn_reinicar"
+                    android:id="@+id/btn_reiniciar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/reiniciar" />
+                    android:text="@string/reiniciar"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <ListView
                 android:id="@+id/listview_items_pedido"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
+                android:layout_height="133dp"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
