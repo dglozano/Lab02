@@ -8,8 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
 import java.util.List;
+
+import gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo.Utils;
 
 /**
  * Created by diegogarcialozano on 03/09/17.
