@@ -96,6 +96,9 @@ public class Pedido implements Serializable{
         this.postre = postre;
     }
 
+    public Pedido() {
+    }
+
     public Pedido(String nombreCliente, String email, String nombre, Double costo, Boolean esDelivery, String horaEntrega, Utils.ElementoMenu bebida, Utils.ElementoMenu plato, Utils.ElementoMenu postre) {
 
         this.nombreCliente = nombreCliente;
