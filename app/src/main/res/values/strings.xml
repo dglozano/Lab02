@@ -14,4 +14,10 @@
     <string name="reiniciar">Reiniciar</string>
     <string name="error_ya_confirmado">El pedido ya fue realizado.</string>
     <string name="error_empty">No ha seleccionado ningun plato</string>
+    <string name="nombre">Nombre y Apellido</string>
+    <string name="email">Email</string>
+    <string name="visa_master_american">VISA, MasterCard o American</string>
+    <string name="num_tarjeta_placeholder">xxxx-xxxx-xxxx-xxxx</string>
+    <string name="confirmar_pago">Confirmar pago</string>
+    <string name="cancelar">Cancelar</string>
 </resources>
