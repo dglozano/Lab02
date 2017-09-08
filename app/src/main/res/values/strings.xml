@@ -20,4 +20,7 @@
     <string name="num_tarjeta_placeholder">xxxx-xxxx-xxxx-xxxx</string>
     <string name="confirmar_pago">Confirmar pago</string>
     <string name="cancelar">Cancelar</string>
+    <string name="postre_ya_agregado">Postre ya agregado. Pulse Reiniciar para cambiar pedido.</string>
+    <string name="principal_ya_agregado">Principal ya agregado. Pulse Reiniciar para cambiar pedido.</string>
+    <string name="bebida_ya_agregada">Bebida ya agregada. Pulse Reiniciar para cambiar pedido.</string>
 </resources>
