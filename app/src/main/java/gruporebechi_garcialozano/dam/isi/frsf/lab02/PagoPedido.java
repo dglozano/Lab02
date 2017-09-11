@@ -1,5 +1,6 @@
 package gruporebechi_garcialozano.dam.isi.frsf.lab02;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,17 +42,27 @@ public class PagoPedido extends AppCompatActivity {
         btnCancelarPago.setOnClickListener(new cancelarBtnListener());
     }
 
-    private static class cancelarBtnListener implements View.OnClickListener {
+    private class cancelarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
 
+            //TODO completar
+
+            Intent iResultado = getIntent();
+            setResult(RESULT_OK,iResultado);
+            finish();
         }
     }
 
-    private static class confirmarPagoBtnListener implements View.OnClickListener {
+    private class confirmarPagoBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
 
+            //TODO completar
+
+            Intent iResultado = getIntent();
+            setResult(RESULT_OK,iResultado);
+            finish();
         }
     }
 }

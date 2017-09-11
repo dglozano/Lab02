@@ -1,5 +1,6 @@
 package gruporebechi_garcialozano.dam.isi.frsf.lab02;
 
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,8 @@ import gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo.TipoPlato;
 import gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo.Utils;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final Integer PAGO_PEDIDO_REQUEST=1;
 
     private ToggleButton tgbtnReservaDelivery;
     private Spinner spinnerHorario;
@@ -190,8 +193,8 @@ public class MainActivity extends AppCompatActivity {
                 pedido.setEsDelivery(tgbtnReservaDelivery.isChecked());
                 pedido.setHoraEntrega(spinnerHorario.getSelectedItem().toString());
 
-                DecimalFormat df = new DecimalFormat("##.##");
-                txtDetallesPedido.setText(txtDetallesPedido.getText().toString() + "\nTotal: $ " + df.format(total));
+                Intent intent = new Intent(MainActivity.this,PagoPedido.class);
+                startActivityForResult(intent,PAGO_PEDIDO_REQUEST);
             }
             else {
                 displayErrores();
@@ -208,6 +211,18 @@ public class MainActivity extends AppCompatActivity {
             txtDetallesPedido.scrollTo(0,0);
             radiogrpTipoPlato.check(R.id.radiobtn_plato);
             pedido = new Pedido();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==PAGO_PEDIDO_REQUEST){
+            if (resultCode == RESULT_OK) {
+                double monto = pedido.getCosto();
+                Toast.makeText(MainActivity.this, getString(R.string.pago_confirmado,monto), Toast.LENGTH_SHORT).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(MainActivity.this, R.string.pago_cancelado, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

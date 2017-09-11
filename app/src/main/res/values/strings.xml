@@ -24,4 +24,6 @@
     <string name="principal_ya_agregado">Principal ya agregado. Pulse Reiniciar para cambiar pedido.</string>
     <string name="bebida_ya_agregada">Bebida ya agregada. Pulse Reiniciar para cambiar pedido.</string>
     <string name="mm_aa">MM/AA</string>
+    <string name="pago_confirmado">El pago fue confirmado. Monto: %1$.2f</string>
+    <string name="pago_cancelado">El pago fue cancelado</string>
 </resources>
