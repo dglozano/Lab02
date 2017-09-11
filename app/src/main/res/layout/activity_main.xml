@@ -6,129 +6,138 @@
     android:layout_height="match_parent"
     tools:context="gruporebechi_garcialozano.dam.isi.frsf.lab02.MainActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:padding="15dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="8dp">
-
-        <TextView
-            android:id="@+id/app_titulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_titulo" />
-
-        <ToggleButton
-            android:id="@+id/tgbtn_reserva_delivery"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:textOff="@string/reservar_mesa"
-            android:textOn="@string/delivery" />
-
-        <TextView
-            android:id="@+id/txtview_seleccione_horario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/seleccione_horario" />
-
-        <Spinner
-            android:id="@+id/spinner_horario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
-
-        <Switch
-            android:id="@+id/switch_notificar_reserva"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/notificar_reserva" />
-
-        <TextView
-            android:id="@+id/txt_detalles_pedido"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:padding="10dp"
-            android:scrollbarAlwaysDrawVerticalTrack="false"
-            android:scrollbarFadeDuration="0"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbars="vertical"
-            android:text="@string/no_hay_items" />
-
-        <RadioGroup
-            android:id="@+id/radiogrp_tipo_plato"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:checkedButton="@+id/radiobtn_plato"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radiobtn_plato"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:paddingRight="5dp"
-                android:text="@string/plato" />
-
-            <RadioButton
-                android:id="@+id/radiobtn_postre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingRight="5dp"
-                android:text="@string/postre" />
-
-            <RadioButton
-                android:id="@+id/radiobtn_bebida"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingRight="5dp"
-                android:text="@string/bebida" />
-
-        </RadioGroup>
+        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintVertical_bias="0.494">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_agregar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/agregar"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/btn_confirmar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/pagar_pedido"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/btn_reiniciar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/reiniciar"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/listview_items_pedido"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="15dp"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/app_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_titulo" />
+
+            <ToggleButton
+                android:id="@+id/tgbtn_reserva_delivery"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textOff="@string/reservar_mesa"
+                android:textOn="@string/delivery" />
+
+            <TextView
+                android:id="@+id/txtview_seleccione_horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/seleccione_horario" />
+
+            <Spinner
+                android:id="@+id/spinner_horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp" />
+
+            <Switch
+                android:id="@+id/switch_notificar_reserva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notificar_reserva" />
+
+            <TextView
+                android:id="@+id/txt_detalles_pedido"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical"
+                android:text="@string/no_hay_items" />
+
+            <RadioGroup
+                android:id="@+id/radiogrp_tipo_plato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:checkedButton="@+id/radiobtn_plato"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radiobtn_plato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:paddingRight="5dp"
+                    android:text="@string/plato" />
+
+                <RadioButton
+                    android:id="@+id/radiobtn_postre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingRight="5dp"
+                    android:text="@string/postre" />
+
+                <RadioButton
+                    android:id="@+id/radiobtn_bebida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingRight="5dp"
+                    android:text="@string/bebida" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_agregar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/agregar"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btn_confirmar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/pagar_pedido"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btn_reiniciar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/reiniciar"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listview_items_pedido"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="true" />
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
