@@ -1,10 +1,9 @@
 package gruporebechi_garcialozano.dam.isi.frsf.lab02;
 
 import android.content.Intent;
-import android.os.PersistableBundle;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -185,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             if(!listaPedidos.isEmpty() && !pedidoListo){
                 Double total = 0.0;
-                pedidoListo = true;
                 for(Utils.ElementoMenu e : listaPedidos){
                     total += e.getPrecio();
                 }
@@ -218,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==PAGO_PEDIDO_REQUEST){
             if (resultCode == RESULT_OK) {
+                pedidoListo = true;
                 double monto = pedido.getCosto();
                 Toast.makeText(MainActivity.this, getString(R.string.pago_confirmado,monto), Toast.LENGTH_SHORT).show();
             } else if (resultCode == RESULT_CANCELED) {

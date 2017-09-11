@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo.Pedido;
+import gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo.Tarjeta;
 
 public class PagoPedido extends AppCompatActivity {
 
@@ -17,14 +21,23 @@ public class PagoPedido extends AppCompatActivity {
     private Button btnConfirmarPago;
     private Button btnCancelarPago;
 
+    private String nombreApellido;
+    private String email;
+    private String tipoTarjeta;
+    private String numeroTarjeta;
+    private String fechaVencimiento;
+
+    private Pedido pedido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pago_pedido);
 
-        getElementosById();
+        pedido = (Pedido) savedInstanceState.getSerializable("pedido");
 
+        getElementosById();
+        addListeners();
     }
 
     private void getElementosById() {
@@ -45,9 +58,6 @@ public class PagoPedido extends AppCompatActivity {
     private class cancelarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-
-            //TODO completar
-
             Intent iResultado = getIntent();
             setResult(RESULT_OK,iResultado);
             finish();
@@ -58,11 +68,39 @@ public class PagoPedido extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            //TODO completar
+            getDatosIngresados();
+            if(sonDatosValidos()) {
+                Tarjeta tarjeta = new Tarjeta();
+                tarjeta.setFechaVencimiento(fechaVencimiento);
+                tarjeta.setNombre(tipoTarjeta);
+                tarjeta.setNumero(numeroTarjeta);
+                pedido.setNombreCliente(nombreApellido);
+                pedido.setEmail(email);
+                pedido.setTarjeta(tarjeta);
 
-            Intent iResultado = getIntent();
-            setResult(RESULT_OK,iResultado);
-            finish();
+                Intent iResultado = getIntent();
+                setResult(RESULT_OK, iResultado);
+                finish();
+            } else {
+                Toast.makeText(PagoPedido.this, R.string.campos_incompletos, Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private void getDatosIngresados() {
+        nombreApellido = txtInputNombreApellido.getText().toString();
+        email = txtInputEmail.getText().toString();
+        tipoTarjeta = txtInputTipoTarjeta.getText().toString();
+        numeroTarjeta = txtInputNumeroTarjeta.getText().toString();
+        fechaVencimiento = txtInputFechaVencimiento.getText().toString();
+    }
+
+    private boolean sonDatosValidos() {
+        return strNotEmpty(nombreApellido) && strNotEmpty(email) && strNotEmpty(tipoTarjeta) &&
+                strNotEmpty(numeroTarjeta) && strNotEmpty(fechaVencimiento);
+    }
+
+    private boolean strNotEmpty(String str) {
+        return str != null && !str.trim().isEmpty();
     }
 }

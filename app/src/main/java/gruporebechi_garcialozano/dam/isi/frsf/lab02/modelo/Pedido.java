@@ -2,14 +2,10 @@ package gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo;
 
 import java.io.Serializable;
 
-/**
- * Created by esteb on 7/9/2017.
- */
-
 public class Pedido implements Serializable{
     private String nombreCliente;
     private String email;
-    private String nombre;
+    private Tarjeta tarjeta;
     private Double costo;
     private Boolean esDelivery;
     private String horaEntrega;
@@ -40,12 +36,12 @@ public class Pedido implements Serializable{
         this.email = email;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Tarjeta getTarjeta() {
+        return tarjeta;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setTarjeta(Tarjeta tarjeta) {
+        this.tarjeta = tarjeta;
     }
 
     public Double getCosto() {
@@ -97,18 +93,5 @@ public class Pedido implements Serializable{
     }
 
     public Pedido() {
-    }
-
-    public Pedido(String nombreCliente, String email, String nombre, Double costo, Boolean esDelivery, String horaEntrega, Utils.ElementoMenu bebida, Utils.ElementoMenu plato, Utils.ElementoMenu postre) {
-
-        this.nombreCliente = nombreCliente;
-        this.email = email;
-        this.nombre = nombre;
-        this.costo = costo;
-        this.esDelivery = esDelivery;
-        this.horaEntrega = horaEntrega;
-        this.bebida = bebida;
-        this.plato = plato;
-        this.postre = postre;
     }
 }

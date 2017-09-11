@@ -26,4 +26,5 @@
     <string name="mm_aa">MM/AA</string>
     <string name="pago_confirmado">El pago fue confirmado. Monto: %1$.2f</string>
     <string name="pago_cancelado">El pago fue cancelado</string>
+    <string name="campos_incompletos">Complete todos los campos</string>
 </resources>
