@@ -71,14 +71,13 @@ public class PagoPedido extends AppCompatActivity {
 
             getDatosIngresados();
             if(sonDatosValidos()) {
-                Tarjeta tarjeta = new Tarjeta();
-                tarjeta.setFechaVencimiento(fechaVencimiento);
-                tarjeta.setNombre(tipoTarjeta);
-                tarjeta.setNumero(numeroTarjeta);
+                pedido.getTarjeta().setFechaVencimiento(fechaVencimiento);
+                pedido.getTarjeta().setNombre(tipoTarjeta);
+                pedido.getTarjeta().setNumero(numeroTarjeta);
                 pedido.setNombreCliente(nombreApellido);
                 pedido.setEmail(email);
-                pedido.setTarjeta(tarjeta);
 
+                intentOrigen.putExtra("resultado_pedido",pedido);
                 setResult(RESULT_OK, intentOrigen);
                 finish();
             } else {

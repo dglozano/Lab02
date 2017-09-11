@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -198,11 +199,9 @@ public class MainActivity extends AppCompatActivity {
                 pedido.setEsDelivery(tgbtnReservaDelivery.isChecked());
                 pedido.setHoraEntrega(spinnerHorario.getSelectedItem().toString());
 
-
-                //FIXME esto no estaría andando, lpm
-                Intent intent = new Intent(MainActivity.this,PagoPedido.class);
-                intent.putExtra("pedido",pedido);
-                startActivityForResult(intent,PAGO_PEDIDO_REQUEST);
+                Intent intent = new Intent(MainActivity.this, PagoPedido.class);
+                intent.putExtra("pedido", pedido);
+                startActivityForResult(intent, PAGO_PEDIDO_REQUEST);
             }
             else {
                 displayErrores();
@@ -234,7 +233,12 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode==PAGO_PEDIDO_REQUEST){
             if (resultCode == RESULT_OK) {
                 pedidoListo = true;
+                pedido = (Pedido) data.getSerializableExtra("resultado_pedido");
+
                 double monto = pedido.getCosto();
+                DecimalFormat df = new DecimalFormat("##.##");
+                txtDetallesPedido.setText(txtDetallesPedido.getText().toString()+"\nTotal: $ " + df.format(monto));
+
                 Toast.makeText(MainActivity.this, getString(R.string.pago_confirmado,monto), Toast.LENGTH_SHORT).show();
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(MainActivity.this, R.string.pago_cancelado, Toast.LENGTH_SHORT).show();

@@ -93,5 +93,7 @@ public class Pedido implements Serializable{
     }
 
     public Pedido() {
+        tarjeta = new Tarjeta();
+        costo = 0.0;
     }
 }

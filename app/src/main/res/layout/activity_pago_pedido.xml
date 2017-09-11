@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/visa_master_american"
-            android:inputType="number" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/txtinput_numero_tarjeta"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/num_tarjeta_placeholder"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/txtinput_fecha_venc"
