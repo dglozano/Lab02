@@ -27,7 +27,7 @@ public class PagoPedido extends AppCompatActivity {
     }
 
     private void getElementosById() {
-        txtInputEmail = (EditText) findViewById(R.id.txtinput_nombre);
+        txtInputNombreApellido = (EditText) findViewById(R.id.txtinput_nombre);
         txtInputEmail = (EditText) findViewById(R.id.txtinput_email);
         txtInputTipoTarjeta = (EditText) findViewById(R.id.txtinput_tipo_tarjeta);
         txtInputNumeroTarjeta = (EditText) findViewById(R.id.txtinput_numero_tarjeta);

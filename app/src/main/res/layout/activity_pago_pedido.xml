@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="MM/AA"
+            android:hint="@string/mm_aa"
             android:inputType="date" />
 
         <LinearLayout
@@ -64,14 +64,14 @@
             <Button
                 android:id="@+id/btn_confirmar_pago"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/confirmar_pago" />
 
             <Button
                 android:id="@+id/btn_cancelar_pago"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/cancelar" />
         </LinearLayout>

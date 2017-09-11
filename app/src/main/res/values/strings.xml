@@ -10,17 +10,8 @@
     <string name="postre">Postre</string>
     <string name="bebida">Bebida</string>
     <string name="agregar">Agregar</string>
-    <string name="confirmar_pedido">Confirmar Pedido</string>
+    <string name="pagar_pedido">Pagar Pedido</string>
     <string name="reiniciar">Reiniciar</string>
-    <string name="error_ya_confirmado">El pedido ya fue cargado. Pulse "Pagar Pedido" o "Reiniciar"</string>
+    <string name="error_ya_confirmado">El pedido ya fue realizado.</string>
     <string name="error_empty">No ha seleccionado ningun plato</string>
-    <string name="nombre">Nombre y Apellido</string>
-    <string name="email">Email</string>
-    <string name="visa_master_american">VISA, MasterCard o American</string>
-    <string name="num_tarjeta_placeholder">xxxx-xxxx-xxxx-xxxx</string>
-    <string name="confirmar_pago">Confirmar pago</string>
-    <string name="cancelar">Cancelar</string>
-    <string name="postre_ya_agregado">Postre ya agregado. Pulse Reiniciar para cambiar pedido.</string>
-    <string name="principal_ya_agregado">Principal ya agregado. Pulse Reiniciar para cambiar pedido.</string>
-    <string name="bebida_ya_agregada">Bebida ya agregada. Pulse Reiniciar para cambiar pedido.</string>
 </resources>
