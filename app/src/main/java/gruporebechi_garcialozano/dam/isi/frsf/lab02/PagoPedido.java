@@ -29,12 +29,14 @@ public class PagoPedido extends AppCompatActivity {
 
     private Pedido pedido;
 
+    Intent intentOrigen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pago_pedido);
-
-        pedido = (Pedido) savedInstanceState.getSerializable("pedido");
+        intentOrigen = getIntent();
+        pedido = (Pedido) intentOrigen.getSerializableExtra("pedido");
 
         getElementosById();
         addListeners();
@@ -58,8 +60,7 @@ public class PagoPedido extends AppCompatActivity {
     private class cancelarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent iResultado = getIntent();
-            setResult(RESULT_OK,iResultado);
+            setResult(RESULT_CANCELED,intentOrigen);
             finish();
         }
     }
@@ -78,8 +79,7 @@ public class PagoPedido extends AppCompatActivity {
                 pedido.setEmail(email);
                 pedido.setTarjeta(tarjeta);
 
-                Intent iResultado = getIntent();
-                setResult(RESULT_OK, iResultado);
+                setResult(RESULT_OK, intentOrigen);
                 finish();
             } else {
                 Toast.makeText(PagoPedido.this, R.string.campos_incompletos, Toast.LENGTH_SHORT).show();

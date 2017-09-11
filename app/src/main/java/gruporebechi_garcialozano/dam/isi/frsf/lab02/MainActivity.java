@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Pedido pedido;
 
-    private ArrayList<Utils.ElementoMenu> listaPedidos;
     private boolean pedidoListo = false;
 
     private ArrayList<Utils.ElementoMenu> listaItems;
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         platos = utils.getListaPlatos();
         bebidas = utils.getListaBebidas();
         postres = utils.getListaPostre();
-        listaPedidos = new ArrayList<>();
         pedido = new Pedido();
     }
 
@@ -115,6 +113,13 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         pedido = (Pedido) savedInstanceState.getSerializable("pedido");
         pedidoListo = savedInstanceState.getBoolean("pedido_listo");
+
+        StringBuilder texto = new StringBuilder("");
+        if(pedido.getPlato()!=null) texto.append(pedido.getPlato().toString());
+        if(pedido.getBebida()!=null) texto.append(pedido.getBebida().toString());
+        if(pedido.getPostre()!=null) texto.append(pedido.getPostre().toString());
+        txtDetallesPedido.setText(texto.toString());
+
     }
 
     private class TipoPlatoRadiogrpListener implements RadioGroup.OnCheckedChangeListener {
@@ -142,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             Utils.ElementoMenu elementoMenu = itemsPedidoAdapter.getSelected();
             if(elementoMenu != null && !pedidoListo){
                 Boolean agregarTexto = false;
+                boolean noHabiaPlatoSeleccionado = ningunPlatoSeleccionado();
                 switch (elementoMenu.getTipo()) {
                     case POSTRE:
                         if(pedido.getPostre()==null) {
@@ -166,8 +172,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 if(agregarTexto) {
-                    String text = listaPedidos.isEmpty() ? "" : txtDetallesPedido.getText().toString() + "\n";
-                    listaPedidos.add(elementoMenu);
+                    String textoActual = txtDetallesPedido.getText().toString().trim();
+                    String text = noHabiaPlatoSeleccionado ? "" : textoActual + "\n";
                     text += elementoMenu.toString();
                     txtDetallesPedido.setText(text);
                 }
@@ -181,16 +187,21 @@ public class MainActivity extends AppCompatActivity {
     private class PagarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            if(!listaPedidos.isEmpty() && !pedidoListo){
+            if(!ningunPlatoSeleccionado() && !pedidoListo){
                 Double total = 0.0;
-                for(Utils.ElementoMenu e : listaPedidos){
-                    total += e.getPrecio();
-                }
+
+                if(pedido.getPlato()!=null) total+=pedido.getPlato().getPrecio();
+                if(pedido.getBebida()!=null) total+=pedido.getBebida().getPrecio();
+                if(pedido.getPostre()!=null) total+=pedido.getPostre().getPrecio();
+
                 pedido.setCosto(total);
                 pedido.setEsDelivery(tgbtnReservaDelivery.isChecked());
                 pedido.setHoraEntrega(spinnerHorario.getSelectedItem().toString());
 
+
+                //FIXME esto no estaría andando, lpm
                 Intent intent = new Intent(MainActivity.this,PagoPedido.class);
+                intent.putExtra("pedido",pedido);
                 startActivityForResult(intent,PAGO_PEDIDO_REQUEST);
             }
             else {
@@ -202,13 +213,20 @@ public class MainActivity extends AppCompatActivity {
     private class ReiniciarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            listaPedidos.clear();
             txtDetallesPedido.setText(R.string.no_hay_items);
             pedidoListo = false;
             txtDetallesPedido.scrollTo(0,0);
             radiogrpTipoPlato.check(R.id.radiobtn_plato);
             pedido = new Pedido();
         }
+    }
+
+    private boolean ningunPlatoSeleccionado() {
+        boolean resultado = true;
+        if(pedido.getPlato()!=null) resultado = false;
+        if(pedido.getBebida()!=null) resultado = false;
+        if(pedido.getPostre()!=null) resultado = false;
+        return resultado;
     }
 
     @Override
