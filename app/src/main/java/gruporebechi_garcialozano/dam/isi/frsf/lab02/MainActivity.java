@@ -103,15 +103,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        //TODO implementar
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("pedido",pedido);
+        outState.putBoolean("pedido_listo",pedidoListo);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        //TODO implementar
+        pedido = (Pedido) savedInstanceState.getSerializable("pedido");
+        pedidoListo = savedInstanceState.getBoolean("pedido_listo");
     }
 
     private class TipoPlatoRadiogrpListener implements RadioGroup.OnCheckedChangeListener {
@@ -219,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void mostrarItemYaAgregado(TipoPlato tipo) {
-        int recurso;
+        int recurso = 0;
         switch (tipo) {
             case POSTRE:
                 recurso = R.string.postre_ya_agregado;
