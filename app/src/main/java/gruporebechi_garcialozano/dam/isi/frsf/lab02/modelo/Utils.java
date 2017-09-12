@@ -1,17 +1,18 @@
 package gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo;
 
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Random;
 
-public class Utils {
+public class Utils implements Serializable {
     DecimalFormat f = new DecimalFormat("##.00");
 
     private ElementoMenu[] listaBebidas;
     private ElementoMenu[] listaPlatos;
     private ElementoMenu[] listaPostre;
 
-    public class ElementoMenu {
+    public class ElementoMenu implements Serializable {
         private Integer id;
         private String nombre;
         private Double precio;

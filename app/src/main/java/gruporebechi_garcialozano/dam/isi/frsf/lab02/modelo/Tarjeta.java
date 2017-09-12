@@ -3,15 +3,11 @@ package gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by esteb on 7/9/2017.
- */
-
 public class Tarjeta implements Serializable{
     private String nombre;
-    private Integer numero;
+    private String numero;
     private Integer seguridad;
-    private Date fechaVencimiento;
+    private String fechaVencimiento;
 
     @Override
     public String toString() {
@@ -20,11 +16,7 @@ public class Tarjeta implements Serializable{
                 '}';
     }
 
-    public Tarjeta(String nombre, Integer numero, Integer seguridad, Date fechaVencimiento) {
-        this.nombre = nombre;
-        this.numero = numero;
-        this.seguridad = seguridad;
-        this.fechaVencimiento = fechaVencimiento;
+    public Tarjeta() {
     }
 
     public String getNombre() {
@@ -36,11 +28,11 @@ public class Tarjeta implements Serializable{
         this.nombre = nombre;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -52,11 +44,11 @@ public class Tarjeta implements Serializable{
         this.seguridad = seguridad;
     }
 
-    public Date getFechaVencimiento() {
+    public String getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
+    public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 }

@@ -1,10 +1,15 @@
 package gruporebechi_garcialozano.dam.isi.frsf.lab02;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo.Pedido;
+import gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo.Tarjeta;
 
 public class PagoPedido extends AppCompatActivity {
 
@@ -16,18 +21,29 @@ public class PagoPedido extends AppCompatActivity {
     private Button btnConfirmarPago;
     private Button btnCancelarPago;
 
+    private String nombreApellido;
+    private String email;
+    private String tipoTarjeta;
+    private String numeroTarjeta;
+    private String fechaVencimiento;
+
+    private Pedido pedido;
+
+    Intent intentOrigen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pago_pedido);
+        intentOrigen = getIntent();
+        pedido = (Pedido) intentOrigen.getSerializableExtra("pedido");
 
         getElementosById();
-
+        addListeners();
     }
 
     private void getElementosById() {
-        txtInputEmail = (EditText) findViewById(R.id.txtinput_nombre);
+        txtInputNombreApellido = (EditText) findViewById(R.id.txtinput_nombre);
         txtInputEmail = (EditText) findViewById(R.id.txtinput_email);
         txtInputTipoTarjeta = (EditText) findViewById(R.id.txtinput_tipo_tarjeta);
         txtInputNumeroTarjeta = (EditText) findViewById(R.id.txtinput_numero_tarjeta);
@@ -41,17 +57,49 @@ public class PagoPedido extends AppCompatActivity {
         btnCancelarPago.setOnClickListener(new cancelarBtnListener());
     }
 
-    private static class cancelarBtnListener implements View.OnClickListener {
+    private class cancelarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-
+            setResult(RESULT_CANCELED,intentOrigen);
+            finish();
         }
     }
 
-    private static class confirmarPagoBtnListener implements View.OnClickListener {
+    private class confirmarPagoBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
 
+            getDatosIngresados();
+            if(sonDatosValidos()) {
+                pedido.getTarjeta().setFechaVencimiento(fechaVencimiento);
+                pedido.getTarjeta().setNombre(tipoTarjeta);
+                pedido.getTarjeta().setNumero(numeroTarjeta);
+                pedido.setNombreCliente(nombreApellido);
+                pedido.setEmail(email);
+
+                intentOrigen.putExtra("resultado_pedido",pedido);
+                setResult(RESULT_OK, intentOrigen);
+                finish();
+            } else {
+                Toast.makeText(PagoPedido.this, R.string.campos_incompletos, Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private void getDatosIngresados() {
+        nombreApellido = txtInputNombreApellido.getText().toString();
+        email = txtInputEmail.getText().toString();
+        tipoTarjeta = txtInputTipoTarjeta.getText().toString();
+        numeroTarjeta = txtInputNumeroTarjeta.getText().toString();
+        fechaVencimiento = txtInputFechaVencimiento.getText().toString();
+    }
+
+    private boolean sonDatosValidos() {
+        return strNotEmpty(nombreApellido) && strNotEmpty(email) && strNotEmpty(tipoTarjeta) &&
+                strNotEmpty(numeroTarjeta) && strNotEmpty(fechaVencimiento);
+    }
+
+    private boolean strNotEmpty(String str) {
+        return str != null && !str.trim().isEmpty();
     }
 }

@@ -10,9 +10,9 @@
     <string name="postre">Postre</string>
     <string name="bebida">Bebida</string>
     <string name="agregar">Agregar</string>
-    <string name="confirmar_pedido">Confirmar Pedido</string>
+    <string name="pagar_pedido">Pagar Pedido</string>
     <string name="reiniciar">Reiniciar</string>
-    <string name="error_ya_confirmado">El pedido ya fue cargado. Pulse "Pagar Pedido" o "Reiniciar"</string>
+    <string name="error_ya_confirmado">El pedido ya fue realizado.</string>
     <string name="error_empty">No ha seleccionado ningun plato</string>
     <string name="nombre">Nombre y Apellido</string>
     <string name="email">Email</string>
@@ -23,4 +23,8 @@
     <string name="postre_ya_agregado">Postre ya agregado. Pulse Reiniciar para cambiar pedido.</string>
     <string name="principal_ya_agregado">Principal ya agregado. Pulse Reiniciar para cambiar pedido.</string>
     <string name="bebida_ya_agregada">Bebida ya agregada. Pulse Reiniciar para cambiar pedido.</string>
+    <string name="mm_aa">MM/AA</string>
+    <string name="pago_confirmado">El pago fue confirmado. Monto: %1$.2f</string>
+    <string name="pago_cancelado">El pago fue cancelado</string>
+    <string name="campos_incompletos">Complete todos los campos</string>
 </resources>
