@@ -26,7 +26,7 @@ import gruporebechi_garcialozano.dam.isi.frsf.lab02.modelo.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Integer PAGO_PEDIDO_REQUEST=1;
+    private final Integer PAGO_PEDIDO_REQUEST = 1;
 
     private ToggleButton tgbtnReservaDelivery;
     private Spinner spinnerHorario;
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("pedido",pedido);
-        outState.putBoolean("pedido_listo",pedidoListo);
+        outState.putSerializable("pedido", pedido);
+        outState.putBoolean("pedido_listo", pedidoListo);
     }
 
     @Override
@@ -116,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
         pedidoListo = savedInstanceState.getBoolean("pedido_listo");
 
         StringBuilder texto = new StringBuilder("");
-        if(pedido.getPlato()!=null) texto.append(pedido.getPlato().toString());
-        if(pedido.getBebida()!=null) texto.append(pedido.getBebida().toString());
-        if(pedido.getPostre()!=null) texto.append(pedido.getPostre().toString());
+        if(pedido.getPlato() != null) texto.append(pedido.getPlato().toString()).append("\n");
+        if(pedido.getBebida() != null) texto.append(pedido.getBebida().toString()).append("\n");
+        if(pedido.getPostre() != null) texto.append(pedido.getPostre().toString()).append("\n");
         txtDetallesPedido.setText(texto.toString());
 
     }
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, @IdRes int id) {
             listaItems.clear();
-            switch (id) {
+            switch(id) {
                 case R.id.radiobtn_plato:
                     listaItems.addAll(Arrays.asList(platos));
                     break;
@@ -146,30 +146,27 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Utils.ElementoMenu elementoMenu = itemsPedidoAdapter.getSelected();
-            if(elementoMenu != null && !pedidoListo){
+            if(elementoMenu != null && !pedidoListo) {
                 Boolean agregarTexto = false;
                 boolean noHabiaPlatoSeleccionado = ningunPlatoSeleccionado();
-                switch (elementoMenu.getTipo()) {
+                switch(elementoMenu.getTipo()) {
                     case POSTRE:
-                        if(pedido.getPostre()==null) {
+                        if(pedido.getPostre() == null) {
                             pedido.setPostre(elementoMenu);
                             agregarTexto = true;
-                        }
-                        else mostrarItemYaAgregado(TipoPlato.POSTRE);
+                        } else mostrarItemYaAgregado(TipoPlato.POSTRE);
                         break;
                     case PRINCIPAL:
-                        if(pedido.getPlato()==null) {
+                        if(pedido.getPlato() == null) {
                             pedido.setPlato(elementoMenu);
                             agregarTexto = true;
-                        }
-                        else mostrarItemYaAgregado(TipoPlato.PRINCIPAL);
+                        } else mostrarItemYaAgregado(TipoPlato.PRINCIPAL);
                         break;
                     case BEBIDA:
-                        if(pedido.getBebida()==null) {
+                        if(pedido.getBebida() == null) {
                             pedido.setBebida(elementoMenu);
                             agregarTexto = true;
-                        }
-                        else mostrarItemYaAgregado(TipoPlato.BEBIDA);
+                        } else mostrarItemYaAgregado(TipoPlato.BEBIDA);
                         break;
                 }
                 if(agregarTexto) {
@@ -178,8 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     text += elementoMenu.toString();
                     txtDetallesPedido.setText(text);
                 }
-            }
-            else {
+            } else {
                 displayErrores();
             }
         }
@@ -188,12 +184,12 @@ public class MainActivity extends AppCompatActivity {
     private class PagarBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            if(!ningunPlatoSeleccionado() && !pedidoListo){
+            if(!ningunPlatoSeleccionado() && !pedidoListo) {
                 Double total = 0.0;
 
-                if(pedido.getPlato()!=null) total+=pedido.getPlato().getPrecio();
-                if(pedido.getBebida()!=null) total+=pedido.getBebida().getPrecio();
-                if(pedido.getPostre()!=null) total+=pedido.getPostre().getPrecio();
+                if(pedido.getPlato() != null) total += pedido.getPlato().getPrecio();
+                if(pedido.getBebida() != null) total += pedido.getBebida().getPrecio();
+                if(pedido.getPostre() != null) total += pedido.getPostre().getPrecio();
 
                 pedido.setCosto(total);
                 pedido.setEsDelivery(tgbtnReservaDelivery.isChecked());
@@ -202,8 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, PagoPedido.class);
                 intent.putExtra("pedido", pedido);
                 startActivityForResult(intent, PAGO_PEDIDO_REQUEST);
-            }
-            else {
+            } else {
                 displayErrores();
             }
         }
@@ -214,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             txtDetallesPedido.setText(R.string.no_hay_items);
             pedidoListo = false;
-            txtDetallesPedido.scrollTo(0,0);
+            txtDetallesPedido.scrollTo(0, 0);
             radiogrpTipoPlato.check(R.id.radiobtn_plato);
             pedido = new Pedido();
         }
@@ -222,25 +217,25 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean ningunPlatoSeleccionado() {
         boolean resultado = true;
-        if(pedido.getPlato()!=null) resultado = false;
-        if(pedido.getBebida()!=null) resultado = false;
-        if(pedido.getPostre()!=null) resultado = false;
+        if(pedido.getPlato() != null) resultado = false;
+        if(pedido.getBebida() != null) resultado = false;
+        if(pedido.getPostre() != null) resultado = false;
         return resultado;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==PAGO_PEDIDO_REQUEST){
-            if (resultCode == RESULT_OK) {
+        if(requestCode == PAGO_PEDIDO_REQUEST) {
+            if(resultCode == RESULT_OK) {
                 pedidoListo = true;
                 pedido = (Pedido) data.getSerializableExtra("resultado_pedido");
 
                 double monto = pedido.getCosto();
                 DecimalFormat df = new DecimalFormat("##.##");
-                txtDetallesPedido.setText(txtDetallesPedido.getText().toString()+"\nTotal: $ " + df.format(monto));
+                txtDetallesPedido.setText(txtDetallesPedido.getText().toString() + "\nTotal: $ " + df.format(monto));
 
-                Toast.makeText(MainActivity.this, getString(R.string.pago_confirmado,monto), Toast.LENGTH_SHORT).show();
-            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(MainActivity.this, getString(R.string.pago_confirmado, monto), Toast.LENGTH_SHORT).show();
+            } else if(resultCode == RESULT_CANCELED) {
                 Toast.makeText(MainActivity.this, R.string.pago_cancelado, Toast.LENGTH_SHORT).show();
             }
         }
@@ -249,15 +244,14 @@ public class MainActivity extends AppCompatActivity {
     private void displayErrores() {
         if(pedidoListo) {
             Toast.makeText(MainActivity.this, R.string.error_ya_confirmado, Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             Toast.makeText(MainActivity.this, R.string.error_empty, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void mostrarItemYaAgregado(TipoPlato tipo) {
         int recurso = 0;
-        switch (tipo) {
+        switch(tipo) {
             case POSTRE:
                 recurso = R.string.postre_ya_agregado;
                 break;
